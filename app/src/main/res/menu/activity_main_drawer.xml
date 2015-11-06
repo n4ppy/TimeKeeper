@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_close_all"
+        android:icon="@android:drawable/ic_menu_close_clear_cancel"
+        android:title="Close All"
+        android:enabled="false"/>
+
+    <item android:title="Reports">
+        <menu>
+            <item
+                android:id="@+id/nav_today"
+                android:icon="@android:drawable/ic_menu_day"
+                android:title="Today" />
+            <item
+                android:id="@+id/nav_this_month"
+                android:icon="@android:drawable/ic_menu_month"
+                android:title="This month" />
+            <item
+                android:id="@+id/nav_last_month"
+                android:icon="@android:drawable/ic_media_previous"
+                android:title="Last month" />
+            <item
+                android:id="@+id/nav_all"
+                android:icon="@android:drawable/ic_dialog_dialer"
+                android:title="All" />
+            <item
+                android:id="@+id/nav_export"
+                android:icon="@android:drawable/ic_menu_save"
+                android:title="Export"
+                android:enabled="false" />
+        </menu>
+    </item>
+
+</menu>

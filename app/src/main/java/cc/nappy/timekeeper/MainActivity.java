@@ -1,5 +1,6 @@
 package cc.nappy.timekeeper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,6 +17,10 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    private MenuItem closeAllMenu;
+    private static final int SETTINGS_RESULT = 1;
+    private static final int ABOUT_RESULT = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +34,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Add a new timekeeper", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                closeAllMenu.setEnabled(true);
             }
         });
 
@@ -40,6 +46,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        closeAllMenu =  navigationView.getMenu().findItem(R.id.nav_close_all);
     }
 
     @Override
@@ -56,6 +64,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
         return true;
     }
 
@@ -68,8 +77,17 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            Snackbar.make(findViewById(R.id.drawer_layout), "Settings", Snackbar.LENGTH_LONG)
+            Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivityForResult(i, SETTINGS_RESULT);
+
+            return true;
+        } else  if (id == R.id.action_about) {
+            Snackbar.make(findViewById(R.id.drawer_layout), "About", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
+
+            Intent i = new Intent(getApplicationContext(), AboutActivity.class);
+            startActivityForResult(i, ABOUT_RESULT);
+
             return true;
         }
 
@@ -85,6 +103,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_close_all) {
             Snackbar.make(findViewById(R.id.drawer_layout), "Close all", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
+            closeAllMenu.setEnabled(false);
         } else if (id == R.id.nav_today) {
             Snackbar.make(findViewById(R.id.drawer_layout), "Report today", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
